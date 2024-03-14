@@ -1,11 +1,6 @@
-healthchecks:
-  enable: false
-  require_healthy: false
-  
 api:
   enabled: true
   address: 127.0.0.1:9001
-
 
 # sources:
 #   docker_host:
@@ -17,8 +12,10 @@ sources:
   docker_host:
     type: splunk_hec
     address: 0.0.0.0:8088
-    # valid_tokens:
-    #   - "${LOGFLARE_API_KEY:?undefined env variable}"
+    valid_tokens:
+      - "${LOGFLARE_API_KEY:?undefined env variable}"
+  vector_logs:
+    type: internal_logs
 
 transforms:
   project_logs:
@@ -168,6 +165,12 @@ transforms:
       .metadata.parsed.error_severity = upcase!(.metadata.parsed.error_severity)
 
 sinks:
+  console:
+    type: "console"
+    inputs:
+      - vector_logs
+    encoding:
+      codec: "text
   logflare_auth:
     type: "http"
     inputs:
