@@ -1,8 +1,7 @@
 api:
   enabled: true
   address: 0.0.0.0:9001
-  valid_tokens:
-      - "${LOGFLARE_API_KEY:?undefined env variable}"
+
 
 # sources:
 #   docker_host:
@@ -14,6 +13,8 @@ sources:
   docker_host:
     type: splunk_hec
     address: 0.0.0.0:8088
+    # valid_tokens:
+    #   - "${LOGFLARE_API_KEY:?undefined env variable}"
 
 transforms:
   project_logs:
