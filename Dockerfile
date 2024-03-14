@@ -1,8 +1,6 @@
 FROM timberio/vector:0.28.1-alpine
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/* /tmp/*
-
+RUN apk add --update curl && \
+    rm -rf /var/cache/apk/*
 
 COPY ./vector.yml /etc/vector/vector.yml
