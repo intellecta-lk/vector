@@ -1,6 +1,8 @@
 api:
   enabled: true
   address: 0.0.0.0:9001
+  valid_tokens:
+      - "${LOGFLARE_API_KEY:?undefined env variable}"
 
 # sources:
 #   docker_host:
