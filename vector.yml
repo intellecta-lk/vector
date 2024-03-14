@@ -170,7 +170,7 @@ sinks:
     method: "post"
     request:
       retry_max_duration_secs: 10
-    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=gotrue.logs.prod&api_key=your-super-secret-and-long-logflare-key"
+    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=gotrue.logs.prod&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
   logflare_realtime:
     type: "http"
     inputs:
@@ -180,7 +180,7 @@ sinks:
     method: "post"
     request:
       retry_max_duration_secs: 10
-    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=realtime.logs.prod&api_key=your-super-secret-and-long-logflare-key"
+      uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=realtime.logs.prod&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
   logflare_rest:
     type: "http"
     inputs:
@@ -190,7 +190,7 @@ sinks:
     method: "post"
     request:
       retry_max_duration_secs: 10
-    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=postgREST.logs.prod&api_key=your-super-secret-and-long-logflare-key"
+    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=postgREST.logs.prod&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
   logflare_db:
     type: "http"
     inputs:
@@ -203,7 +203,7 @@ sinks:
     # We must route the sink through kong because ingesting logs before logflare is fully initialised will
     # lead to broken queries from studio. This works by the assumption that containers are started in the
     # following order: vector > db > logflare > kong
-    uri: "http://${SUPABASE_KONG_URL:?undefined env variable}/analytics/v1/api/logs?source_name=postgres.logs&api_key=your-super-secret-and-long-logflare-key"
+    uri: "http://${SUPABASE_KONG_URL:?undefined env variable}/analytics/v1/api/logs?source_name=postgres.logs&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
   logflare_functions:
     type: "http"
     inputs:
@@ -213,7 +213,7 @@ sinks:
     method: "post"
     request:
       retry_max_duration_secs: 10
-    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=deno-relay-logs&api_key=your-super-secret-and-long-logflare-key"
+    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=deno-relay-logs&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
   logflare_storage:
     type: "http"
     inputs:
@@ -223,7 +223,7 @@ sinks:
     method: "post"
     request:
       retry_max_duration_secs: 10
-    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=storage.logs.prod.2&api_key=your-super-secret-and-long-logflare-key"
+    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=storage.logs.prod.2&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
   logflare_kong:
     type: "http"
     inputs:
@@ -234,4 +234,4 @@ sinks:
     method: "post"
     request:
       retry_max_duration_secs: 10
-    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=cloudflare.logs.prod&api_key=your-super-secret-and-long-logflare-key"
+    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=cloudflare.logs.prod&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
