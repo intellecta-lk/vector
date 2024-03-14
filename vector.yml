@@ -169,8 +169,9 @@ sinks:
     type: "console"
     inputs:
       - vector_logs
+      - auth_logs
     encoding:
-      codec: "text
+      codec: "text"
   logflare_auth:
     type: "http"
     inputs:
