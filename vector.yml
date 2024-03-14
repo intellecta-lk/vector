@@ -182,7 +182,7 @@ sinks:
     method: "post"
     request:
       retry_max_duration_secs: 10
-      uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=realtime.logs.prod&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
+    uri: "http://${SUPABASE_ANALYTICS_URL:?undefined env variable}/api/logs?source_name=realtime.logs.prod&api_key=${LOGFLARE_API_KEY:?undefined env variable}"
   logflare_rest:
     type: "http"
     inputs:
