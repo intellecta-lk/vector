@@ -14,8 +14,6 @@ sources:
     address: 0.0.0.0:8088
     valid_tokens:
       - "${LOGFLARE_API_KEY:?undefined env variable}"
-  vector_logs:
-    type: internal_logs
 
 transforms:
   project_logs:
@@ -25,7 +23,7 @@ transforms:
     source: |-
       .project = "default"
       .event_message = del(.message)
-      .appname = del(.container_name)
+      .appname = del(.tag)
       del(.container_created_at)
       del(.container_id)
       del(.source_type)
@@ -165,13 +163,6 @@ transforms:
       .metadata.parsed.error_severity = upcase!(.metadata.parsed.error_severity)
 
 sinks:
-  console:
-    type: "console"
-    inputs:
-      - vector_logs
-      - auth_logs
-    encoding:
-      codec: "text"
   logflare_auth:
     type: "http"
     inputs:
